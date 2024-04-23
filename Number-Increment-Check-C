@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+// program to keep asking for user input as long as a user enters a number two more than the last
+
+int main() {
+    int number1;
+    int number2;
+    printf("\nEnter initial number:");
+    scanf("%d", &number2); 
+    do {
+        number1 = number2; 
+        printf("Enter next number:");
+        scanf("%d", &number2);
+    }
+    while (number2 == number1 + 2);
+    printf("Failed");
+    return 0;
+}
