@@ -1,0 +1,21 @@
+#include <stdio.h>
+
+// code that takes the number of days in a month and the starting day and generates a calendar
+
+int main() {
+    // Write C code here
+    int month;
+    int day;
+    printf("Please enter the days in the month:");
+    scanf("%d", &month);
+    printf("Please enter the day:");
+    scanf("%d", &day);  
+    printf("\n \t \t \t");
+    for (int i = 1; i <= month; i++){
+        printf("%d\t", i);
+        if ((i + day)  % 7 == 0) {
+            printf("\n");
+        }
+    }
+    return 0;
+}
