@@ -1,0 +1,63 @@
+#include <stdio.h>
+#include <string.h>   
+#include <stdlib.h> 
+
+int main() {
+	char hword[50], oword[50], userinput[1]; //declaring variables hword (hangman word), oword(output word) maximum length allowed = 50
+	int wrongattempts = 6; // 6 wrong attempts allowed
+	int length, i, matched, correct = 0; //variable to store the length of hword, i = iterator for for loops, matched is a boolean to store if the userinput is matched in the hword, correct is number of letter-slots filled
+	printf("Please enter a word of maximum 50 letters in all small-case:");
+	scanf_s("%s", &hword); // user input for hword
+	length = strlen(hword); // length of the hword 
+	for (i = 0; i < length; i++) { //one hyphen for each letter-slot in oword
+		oword[i] = '-'; // fill in hyphen at index[i] for oword
+	}
+	oword[length] = '\0'; //null terminated array for oword
+	system("cls"); //system clear
+	printf("%s\n", oword);
+	do { // keep scanning for user input as long as wrong attempts are not zero
+		printf("Please enter a small-case letter:");
+		scanf_s("%s", &userinput); // scans for userinput for letter
+		matched = 0; // initializing the boolean to false. It will be set to true if the userinput is found at any index location in the hword.
+		for (i = 0; i < length; i++) { // scanning hword index by index from index 0 to length-1
+			if (userinput[0] == hword[i] && oword[i] == '-') { //checking to see if userinput single character is the same as the character at index i in hword. "Oword[i] == '-'" is so the user cannot keep entering the same character. userinput[0] is so the program only checks the first character in an input.
+				oword[i] = userinput[0]; //Overwrite the hyphen with the userinput character. The location has been matched with the character in hword
+				matched = 1; // Boolean variable set to true as the userinput matched some location in hword
+				correct++; // Variable to count how many letter-slots have been correctly filled
+				if (correct == length) { //Checking to see if all letter-slots are filled
+					printf("SUCCESS!!!\n"); // Ends program; user succeeds
+					return 0;
+				} // else clause not needed because nothing to be done if condition = false
+			} // else clause not needed because it moves onto the next element in the array
+		} // Scan next letter-slot at index[i] in hword and oword for the same userinput
+		if (!matched) { // check to see if userinput did not match any of the letter-slots. If the userinput did not match any letter-slots, then the original boolean value of false will remain and ! will return true
+			wrongattempts--; // number of wrong attempts reduced by 1
+		}
+		system("cls"); //system clear
+		// printf("%s\n", hword); //prints hword on cleared screen
+		printf("%s\n", oword); //prints progressing oword
+		if (wrongattempts >= 0) {
+			printf("\n\t||===== ");
+		} 
+		if (wrongattempts > 0) {
+			printf("\n\t||    | ");
+		}
+		if (wrongattempts > 1) {
+			printf("\n\t||   %cO/", '\\');
+		}
+		if (wrongattempts > 2) {
+			printf("\n\t||    | ");
+		}
+		if (wrongattempts > 3) {
+			printf("\n\t||   / %c", '\\');
+		}
+		if (wrongattempts > 4) {
+			printf("\n\t||      ");
+		}
+		if (wrongattempts > 5) {
+			printf("\n\t||    | ");
+		}
+	} while (wrongattempts > 0); // scan userinput again if wrong attempts have not exhausted
+	printf("FAILED!! Please try again.\n"); // do...while loop completes, meaning wrong attempts have exhausted. User failed.
+	return 0; //Program returns with success
+}
