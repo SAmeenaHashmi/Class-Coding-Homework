@@ -1,0 +1,51 @@
+// base class that includes all common behaviors/properties/methods
+class Animal { 
+    public static void main(String[] args) {
+    }
+    String name; //common property
+    int age; //common property
+    static void eat() {} //common method
+    static void sleep() {} //common method
+    static void makeSound() {} //common method
+  }
+  // the three following are subclasses that inherit from the Animal class
+  class Dog extends Animal {
+    String breed; //dog specific property
+    static void bark() {} //dog specific method
+    static void makeSound() { //overriding makeSound()
+      System.out.print("bark");
+    }
+  }
+  class Cat extends Animal {
+    String color; // cat specific property
+    static void meow() {} //cat specific method
+    static void makeSound() { //overriding makeSound()
+      System.out.print("meow");
+    }
+  }
+  class Bird extends Animal {
+    int wingspan; //bird specific property
+    static void fly() {} //bird specific method
+    static void makeSound() { //overriding makeSound()
+      System.out.print("chirp");
+    }
+  }
+  
+  class Zoo { // Zoo class that tests animal inheritance hierarchy
+    public void Animals() {
+      Dog spot = new Dog(); // instance dog with properties set
+      spot.name = "Spot"; 
+      spot.age = 5;
+      spot.breed = "Dalmatian";
+  
+      Cat mittens = new Cat(); // instance cat with properties set
+      mittens.name = "Mittens";
+      mittens.age = 2;
+      mittens.color = "Calico";
+  
+      Bird tweety = new Bird(); // instance bird with properties set
+      tweety.name = "Tweety";
+      tweety.age = 1;
+      tweety.wingspan = 12;
+    }
+  }
